@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+openai:
+  apiKey: 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
+  chatModel: gpt-3.5-turbo
+  chatTemperature: 0.7
+  chatmaxTokens: 4000
+  conversationNumber: 3
+  proxyHost: 127.0.0.1
+  proxyPort: 10809
+  timeout: 300
+  isProxy: true
+
