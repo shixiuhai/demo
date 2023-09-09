@@ -67,15 +67,23 @@ public class MessageController {
     // 设置是否使用代理
     @Value("${openai.isProxy}")
     private boolean isProxy;
+    // 请求接口验证的sk
+    @Value("${openai.sk}")
+    private String sk;
+
 
     private ConversationMemory memory = ConversationMemory.getInstance();
 
     @PostMapping("")
     public Map<String,String> createMessage(@RequestBody Message message) {
-        log.info("-------------"+Boolean.toString(isProxy));
-        // 大于设置的轮数清理会话记忆
+        // log.info("-------------"+Boolean.toString(isProxy));
+        if(!message.getSk().equals(sk)){
+            return null;
+        }
+
+        // 大于设置的轮数清理第一轮对话
         if(memory.getMemory(message.getUserId()).size()>=conversationNumber*2){
-            memory.clearMemory(message.getUserId());
+            memory.clearTwoMemory(message.getUserId());
         }
         
         // 添加会话到记忆列表中
@@ -86,9 +94,10 @@ public class MessageController {
 
         Map<String,String> out = getOneChat(memory.getMemory(message.getUserId()));
 
-        // 简单的处理了一下错误，所有的错误都移除历史会话
+        // 简单的处理了一下错误，所有的错误都移除所有伦对话
         if(out.get("code").equals("500")){
-            memory.clearMemory(message.getUserId());
+            memory.clearAllMemory(message.getUserId());
+            return out;
         }
 
         // 返回结果的角色是gpt，添加助手对话内容到对话列表

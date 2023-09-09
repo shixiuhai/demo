@@ -6,5 +6,5 @@ import lombok.Data;
 public class Message {
     private String userId;
     private String content;
-    private String name;
+    private String sk;
 }

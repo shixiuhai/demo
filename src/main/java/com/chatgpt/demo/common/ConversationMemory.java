@@ -36,8 +36,19 @@ public class ConversationMemory {
     }
 
     // 可以添加其他操作和逻辑，如清除对话记忆等
-    public void clearMemory(String userId) {
+    public void clearAllMemory(String userId) {
         conversationMap.remove(userId);
     }
+
+    // 清理第一轮的对话
+    public void clearTwoMemory(String userId) {
+        List<ChatMessage> conversation = conversationMap.get(userId);
+        if (conversation != null && conversation.size() >= 2) {
+            // 移除前两条记录
+            conversation.remove(0);
+            conversation.remove(0);
+        }
+    }
+    
 
 }
