@@ -2,6 +2,18 @@
 
 # 设置参数变量
 JAR_FILE="./demo-0.0.1-SNAPSHOT.jar" # 启动的java包名称
+
+JAVA_PID=$(ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}')
+
+# 检查是否找到进程号
+if [ -z "$JAVA_PID" ]; then
+  echo "未找到与Java包 '$JAVA_PACKAGE' 关联的进程."
+else
+  # 使用kill命令终止Java进程
+  kill $JAVA_PID
+  echo "已终止进程号 $JAVA_PID，关联的Java包为 '$JAVA_PACKAGE'."
+fi
+
 IS_PROXY=false # 是否开启代理
 TIMEOUT=300 # 请求接口超时设置
 CHAT_MODEL="gpt-3.5-turbo-16k" # 模型设置
