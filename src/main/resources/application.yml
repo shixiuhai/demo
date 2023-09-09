@@ -2,7 +2,7 @@ server:
   port: 8081
 
 openai:
-  apiKey: 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
+  apiKey: 12345
   chatModel: gpt-3.5-turbo
   chatTemperature: 0.7
   chatmaxTokens: 4000
