@@ -11,4 +11,5 @@ openai:
   proxyPort: 10809
   timeout: 300
   isProxy: true
+  sk: 1qaz@WSX
 
