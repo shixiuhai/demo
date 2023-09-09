@@ -7,11 +7,11 @@ JAVA_PID=$(ps -ef | grep $JAR_FILE | grep -v grep | awk '{print $2}')
 
 # 检查是否找到进程号
 if [ -z "$JAVA_PID" ]; then
-  echo "未找到与Java包 '$JAVA_PACKAGE' 关联的进程."
+  echo "未找到与Java包 '$JAVA_FILE' 关联的进程."
 else
   # 使用kill命令终止Java进程
   kill $JAVA_PID
-  echo "已终止进程号 $JAVA_PID，关联的Java包为 '$JAVA_PACKAGE'."
+  echo "已终止进程号 $JAVA_PID，关联的Java包为 '$JAR_FILE'."
 fi
 
 IS_PROXY=false # 是否开启代理
@@ -23,7 +23,7 @@ CHAT_TEMPERATURE=0.7 # 机器人的温度
 CHAT_MAX_TOKENS=4000 # 回答问题最多返回多少tokens
 
 # 启动Java程序
-nohup java -jar $JAR_FILE --openai.isProxy=$IS_PROXY --openai.timeout=$TIMEOUT --openai.chatModel=$CHAT_MODEL --openai.sk=$SK --openai.apiKey=$API_KEY --openai.chatTemperature=$CHAT_TEMPERATURE --openai.chatMaxTokens=$CHAT_MAX_TOKENS >output.log &
+nohup java -jar $JAR_FILE --openai.isProxy=$IS_PROXY --openai.timeout=$TIMEOUT --openai.chatModel=$CHAT_MODEL --openai.sk=$SK --openai.apiKey=$API_KEY --openai.chatTemperature=$CHAT_TEMPERATURE --openai.chatMaxTokens=$CHAT_MAX_TOKENS  >output.log 2>error.log &
 
 # 输出启动信息
 echo "Java程序已启动"
