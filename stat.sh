@@ -20,10 +20,11 @@ CHAT_MODEL="gpt-3.5-turbo-16k" # 模型设置
 SK="1qaz@WSX" # 三方调api接口的key
 API_KEY="1234" # openai的可以
 CHAT_TEMPERATURE=0.7 # 机器人的温度
-CHAT_MAX_TOKENS=4000 # 回答问题最多返回多少tokens
+CHAT_MAX_TOKENS=800 # 回答问题最多返回多少tokens
+CONVERSATION_NUMBER=3 # 聊天对话记忆轮数
 
 # 启动Java程序
-nohup java -jar $JAR_FILE --openai.isProxy=$IS_PROXY --openai.timeout=$TIMEOUT --openai.chatModel=$CHAT_MODEL --openai.sk=$SK --openai.apiKey=$API_KEY --openai.chatTemperature=$CHAT_TEMPERATURE --openai.chatMaxTokens=$CHAT_MAX_TOKENS  >output.log 2>error.log &
+nohup java -jar $JAR_FILE --openai.isProxy=$IS_PROXY --openai.timeout=$TIMEOUT --openai.chatModel=$CHAT_MODEL --openai.sk=$SK --openai.apiKey=$API_KEY --openai.chatTemperature=$CHAT_TEMPERATURE --openai.chatMaxTokens=$CHAT_MAX_TOKENS --openai.conversationNumbe=$CONVERSATION_NUMBER >output.log 2>error.log &
 
 # 输出启动信息
 echo "Java程序已启动"
